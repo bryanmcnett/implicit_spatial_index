@@ -18,6 +18,6 @@ After doing 4 AABB tests and looking at each of the four query.maximum_x >= data
 
 Then, for each of the sets of 4 we have not tested yet, but which could possibly intersect, we can recursively apply the same steps. In the first round we compared minimum-X, and in the second round we compare maximum-X. Then minimum-Y, and then maximum-Y, and then minimum-X again, and so on. 
 
-Imagine that the original set of 20 rectangles is 84 rectangles: the first 4 tell us which of the following 4 sets of 20 could possibly intersect, and then each set of 20 begins with 4 that tell us which of the following 4 sets of 4 could possibly intersect. This can be extended to 340, 1364, etc.
+Imagine that the original set of 20 rectangles is 84 rectangles: the first 4 tell us which of the following 4 sets of 20 could possibly intersect, and then each set of 20 begins with 4 that tell us which of the following 4 sets of 4 could possibly intersect. This can be extended to 4*(1+84)=340, 4*(1+340)=1364, etc.
 
 4 is convenient because it is a common SIMD width, which enables fast parallel AABB tests. But this number can be 8, or 16, or 32. The larger this number, the more finely-grained we can trivially reject: 4 gives us five choices of 0/4, 1/4, 2/4, 3/4, and 4/4. 32 gives us 33, from 0/32 up to 32/32, in steps of 1/32. However, this gives us fewer rounds in which to cycle through the axes.
